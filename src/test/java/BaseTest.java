@@ -6,13 +6,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 
 public class BaseTest{
     protected WebDriver driver;
 
     @Before
-    public void setupBrowser(){
-        driver = getDriver("chrome");
+    public void setupBrowser() throws IOException {
+        Properties properties = new Properties();
+        properties.load(new FileInputStream("src/test/java/resources/.properties"));
+        driver = getDriver(properties.getProperty("Browser"));
         driver.get(MainPage.URL);
     }
     @After
@@ -22,7 +28,7 @@ public class BaseTest{
 
     private WebDriver getDriver (String driverType)
     {
-        switch (driverType) {
+        switch (driverType.toLowerCase()) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
                 return new ChromeDriver();

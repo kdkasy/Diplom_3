@@ -36,8 +36,8 @@ public class MainPage extends BasePage{
     @FindBy
     private final By downloadPageModal = By.className("Modal_modal_overlay__x2ZCr");
 
-    private final String SECTION_SELECTED_CLASS = "tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect";
-    private final String SECTION_NOT_SELECTED_CLASS = "tab_tab__1SPyG pt-4 pr-10 pb-4 pl-10 noselect";
+    private final String seclionSelectedClassName = "tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect";
+    private final String notSelectedSectionClassName = "tab_tab__1SPyG pt-4 pr-10 pb-4 pl-10 noselect";
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -100,13 +100,13 @@ public class MainPage extends BasePage{
         List<WebElement> spansOfSection = driver.findElement(ingredientsSection).findElements(By.xpath("/span"));
         for(int i = 0; i < divsOfSection.size(); i++){
             if(nameOfSection.equals(spansOfSection.get(i).getText())){
-                if(SECTION_SELECTED_CLASS.equals(divsOfSection.get(i).getAttribute("class"))) { }
+                if(seclionSelectedClassName.equals(divsOfSection.get(i).getAttribute("class"))) { }
                 else {
                     return false;
                 }
             }
             else {
-                if(SECTION_NOT_SELECTED_CLASS.equals(divsOfSection.get(i).getAttribute("class"))) { }
+                if(notSelectedSectionClassName.equals(divsOfSection.get(i).getAttribute("class"))) { }
                 else {
                     return false;
                 }
